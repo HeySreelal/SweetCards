@@ -10,5 +10,9 @@ class SweetTheme {
           primary: primaryColor,
           secondary: secondaryColor,
         ),
+        appBarTheme: const AppBarTheme(
+          elevation: 0,
+          centerTitle: true,
+        ),
       );
 }
