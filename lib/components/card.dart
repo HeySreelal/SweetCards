@@ -14,11 +14,13 @@ class SweetCardView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Color color = SweetTheme.randomColor;
+
     return Container(
       margin: const EdgeInsets.all(8),
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: SweetTheme.secondaryColor,
+        color: color,
         border: const Border(),
         boxShadow: const [
           BoxShadow(
@@ -38,7 +40,7 @@ class SweetCardView extends StatelessWidget {
               horizontal: 10,
             ),
             decoration: BoxDecoration(
-              color: SweetTheme.primaryColor,
+              color: SweetTheme.white,
               borderRadius: const BorderRadius.all(
                 Radius.circular(100),
               ),
@@ -48,12 +50,17 @@ class SweetCardView extends StatelessWidget {
               children: [
                 Text(
                   card.title,
-                  style: Theme.of(context).textTheme.bodyText1,
+                  style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                        color: color,
+                      ),
                 ),
                 const SizedBox(
                   width: 10,
                 ),
-                Icon(card.icon.icon),
+                Icon(
+                  card.icon.icon,
+                  color: color,
+                ),
               ],
             ),
           ),

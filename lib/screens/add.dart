@@ -33,9 +33,9 @@ class _AddMemoryState extends State<AddMemory> {
   void _selectDate(BuildContext context) async {
     final _d = await showDatePicker(
       context: context,
-      initialDate: date,
+      initialDate: DateTime(date.year - 10),
       firstDate: DateTime(1900),
-      lastDate: DateTime(2100),
+      lastDate: DateTime.now(),
     );
     if (_d != null) {
       setState(() {

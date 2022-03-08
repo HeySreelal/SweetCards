@@ -52,6 +52,10 @@ class SweetCard {
   }
 
   Future<void> archive() {
-    return SweetUniverse().archiveCard(this);
+    return SweetUniverse().archive(this);
+  }
+
+  Future<void> unarchive() {
+    return SweetUniverse().archive(this, false);
   }
 }

@@ -15,7 +15,7 @@ class SweetWrapper extends StatelessWidget {
 
     if (isLoggedIn) {
       return StreamProvider<List<SweetCard>>.value(
-        value: SweetUniverse().cards,
+        value: SweetUniverse().cards(),
         initialData: const [],
         child: const SweetHome(),
       );

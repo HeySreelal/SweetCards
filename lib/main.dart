@@ -24,35 +24,7 @@ class MyApp extends StatelessWidget {
       value: SweetAuth.authStream,
       initialData: null,
       child: MaterialApp(
-        theme: ThemeData(
-          scaffoldBackgroundColor: Colors.white,
-          primaryColor: SweetTheme.primaryColor,
-          colorScheme: ColorScheme.light(
-            primary: SweetTheme.primaryColor,
-            secondary: SweetTheme.secondaryColor,
-          ),
-          appBarTheme: const AppBarTheme(
-            elevation: 0,
-            centerTitle: true,
-          ),
-          textTheme: const TextTheme(
-            headline3: TextStyle(
-              fontSize: 54,
-              color: Colors.white,
-            ),
-            bodyText1: TextStyle(
-              fontSize: 14,
-              color: Colors.white,
-            ),
-            bodyText2: TextStyle(
-              color: Colors.black,
-              fontSize: 16,
-            ),
-          ),
-          iconTheme: const IconThemeData(
-            color: Colors.white,
-          ),
-        ),
+        theme: SweetTheme.theme,
         debugShowCheckedModeBanner: false,
         title: 'Sweet Cards',
         home: const SweetWrapper(),

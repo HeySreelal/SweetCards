@@ -16,11 +16,11 @@ class SweetUniverse {
         );
   }
 
-  Stream<List<SweetCard>> get cards {
+  Stream<List<SweetCard>> cards({bool isArchived = false}) {
     return _db
         .collection("cards")
         .where("user", isEqualTo: _user!.uid)
-        .where("isArchived", isEqualTo: false)
+        .where("isArchived", isEqualTo: isArchived)
         .snapshots()
         .map(
           (snapshot) => snapshot.docs
@@ -57,13 +57,15 @@ class SweetUniverse {
   }
 
   // Archive a card
-  Future<void> archiveCard(SweetCard card) async {
+  Future<void> archive(SweetCard card, [bool shouldArchive = true]) async {
     try {
-      card.isArchived = true;
+      card.isArchived = shouldArchive;
       await _db.doc("cards/${card.id}").update(card.toCloud());
       showMsg("Card Archived 🎉");
     } catch (err) {
       showMsg("An error occured. 😕");
     }
   }
+
+  // Archived cards stream
 }
