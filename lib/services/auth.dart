@@ -9,7 +9,10 @@ class SweetAuth {
   static User? get currentUser => _auth.currentUser;
   static Stream<User?> get authStream => _auth.authStateChanges();
 
-  static Future<void> logOut() => _auth.signOut();
+  static void logOut() {
+    _auth.signOut();
+    GoogleSignIn().signOut();
+  }
 
   static Future<bool> signIn() async {
     try {

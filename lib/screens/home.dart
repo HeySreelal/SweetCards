@@ -5,6 +5,7 @@ import 'package:sweetcards/components/dismiss_bg.dart';
 import 'package:sweetcards/models/card.dart';
 import 'package:sweetcards/screens/add.dart';
 import 'package:sweetcards/screens/archived.dart';
+import 'package:sweetcards/services/auth.dart';
 import 'package:sweetcards/utils/slide.dart';
 import 'package:sweetcards/utils/theme.dart';
 
@@ -90,10 +91,7 @@ class _SweetHomeState extends State<SweetHome> {
               "Logout",
               style: Theme.of(context).textTheme.bodyText2,
             ),
-            onTap: () {
-              Navigator.pop(context);
-              Navigator.push(context, slidingRoute(const Scaffold()));
-            },
+            onTap: () => SweetAuth.logOut(),
           ),
           Padding(
             padding: const EdgeInsets.all(12.0),
