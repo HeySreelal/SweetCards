@@ -28,6 +28,10 @@ class SweetField extends StatelessWidget {
     this.capitalization = TextCapitalization.sentences,
     this.leading,
     this.trailing,
+    this.onTap,
+    this.onChanged,
+    this.borderRadius,
+    this.shouldCurve = false,
   }) : super(key: key);
 
   final TextEditingController? controller;
@@ -40,6 +44,10 @@ class SweetField extends StatelessWidget {
   final TextCapitalization capitalization;
   final Widget? leading;
   final Widget? trailing;
+  final VoidCallback? onTap;
+  final Function(String)? onChanged;
+  final bool shouldCurve;
+  final BorderRadius? borderRadius;
 
   @override
   Widget build(BuildContext context) {
@@ -51,10 +59,17 @@ class SweetField extends StatelessWidget {
       decoration: InputDecoration(
         hintText: hintText,
         labelText: labelText,
-        border: const OutlineInputBorder(),
+        border: shouldCurve
+            ? OutlineInputBorder(
+                borderRadius: borderRadius!,
+              )
+            : const OutlineInputBorder(),
         prefixIcon: leading,
         suffixIcon: trailing,
       ),
+      onTap: onTap,
+      onChanged: onChanged,
+      textCapitalization: capitalization,
     );
   }
 }

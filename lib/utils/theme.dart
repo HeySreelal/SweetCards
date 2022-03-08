@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 class SweetTheme {
   static Color primaryColor = const Color(0xFFF26674);
   static Color secondaryColor = const Color(0xFFF04E5F);
+  static Color white = Colors.white;
 
   static ThemeData get theme => ThemeData(
         primaryColor: primaryColor,

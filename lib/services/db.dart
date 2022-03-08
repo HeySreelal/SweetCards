@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:sweetcards/models/card.dart';
 import 'package:sweetcards/models/user.dart';
 import 'package:sweetcards/services/auth.dart';
+import 'package:sweetcards/utils/toast.dart';
 
 class SweetUniverse {
   final _db = FirebaseFirestore.instance;
@@ -30,5 +31,15 @@ class SweetUniverse {
               )
               .toList(),
         );
+  }
+
+  Future<void> newCard(SweetCard card) async {
+    try {
+      card.user = _user!.uid;
+      await _db.collection("cards").add(card.toCloud());
+      showMsg("Card Created 🎉");
+    } catch (err) {
+      showMsg("An error occured. 😕");
+    }
   }
 }

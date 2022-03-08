@@ -1,9 +1,11 @@
+import 'package:sweetcards/models/icon.dart';
+
 class SweetCard {
   String id;
-  String date;
+  DateTime date;
   String title;
   String user;
-  String? icon;
+  SweetIcon icon;
   String? description;
 
   SweetCard({
@@ -11,16 +13,16 @@ class SweetCard {
     required this.date,
     required this.title,
     required this.user,
-    this.icon,
+    required this.icon,
     this.description,
   });
 
   factory SweetCard.fromCloud(Map<String, dynamic> json, String id) {
     return SweetCard(
       id: id,
-      date: json['date'] as String,
+      date: json['date'].toDate(),
       title: json['title'] as String,
-      icon: json['icon'] ?? "default",
+      icon: SweetIcon.fromCloud(json['icon']),
       description: json['description'],
       user: json['user'],
     );
@@ -30,7 +32,7 @@ class SweetCard {
     return {
       'date': date,
       'title': title,
-      'icon': icon,
+      'icon': icon.toCloud(),
       'description': description,
       'user': user,
     };
