@@ -40,7 +40,7 @@ class _AddMemoryState extends State<AddMemory> {
     if (_d != null) {
       setState(() {
         date = _d;
-        memoryDate.text = formatedDate(date);
+        memoryDate.text = SweetDays.formatedDate(date);
       });
     }
   }
@@ -95,6 +95,7 @@ class _AddMemoryState extends State<AddMemory> {
     await SweetUniverse().newCard(_card);
     _clear();
     _setWorking();
+    Navigator.pop(context);
   }
 
   void _clear() {

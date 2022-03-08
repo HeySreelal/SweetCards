@@ -20,6 +20,7 @@ class SweetUniverse {
     return _db
         .collection("cards")
         .where("user", isEqualTo: _user!.uid)
+        .where("isArchived", isEqualTo: false)
         .snapshots()
         .map(
           (snapshot) => snapshot.docs
@@ -36,8 +37,31 @@ class SweetUniverse {
   Future<void> newCard(SweetCard card) async {
     try {
       card.user = _user!.uid;
+      card.createdDate = DateTime.now();
+
       await _db.collection("cards").add(card.toCloud());
       showMsg("Card Created 🎉");
+    } catch (err) {
+      showMsg("An error occured. 😕");
+    }
+  }
+
+  // Delete a card
+  Future<void> deleteCard(SweetCard card) async {
+    try {
+      await _db.doc("cards/${card.id}").delete();
+      showMsg("Card Deleted 🎉");
+    } catch (err) {
+      showMsg("An error occured. 😕");
+    }
+  }
+
+  // Archive a card
+  Future<void> archiveCard(SweetCard card) async {
+    try {
+      card.isArchived = true;
+      await _db.doc("cards/${card.id}").update(card.toCloud());
+      showMsg("Card Archived 🎉");
     } catch (err) {
       showMsg("An error occured. 😕");
     }

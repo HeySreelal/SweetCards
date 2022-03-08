@@ -35,6 +35,23 @@ class MyApp extends StatelessWidget {
             elevation: 0,
             centerTitle: true,
           ),
+          textTheme: const TextTheme(
+            headline3: TextStyle(
+              fontSize: 54,
+              color: Colors.white,
+            ),
+            bodyText1: TextStyle(
+              fontSize: 14,
+              color: Colors.white,
+            ),
+            bodyText2: TextStyle(
+              color: Colors.black,
+              fontSize: 16,
+            ),
+          ),
+          iconTheme: const IconThemeData(
+            color: Colors.white,
+          ),
         ),
         debugShowCheckedModeBanner: false,
         title: 'Sweet Cards',

@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:sweetcards/components/card.dart';
 import 'package:sweetcards/models/card.dart';
 import 'package:sweetcards/screens/add.dart';
+import 'package:sweetcards/utils/date.dart';
 import 'package:sweetcards/utils/slide.dart';
+import 'package:sweetcards/utils/theme.dart';
 
 class SweetHome extends StatefulWidget {
   const SweetHome({Key? key}) : super(key: key);
@@ -51,7 +54,7 @@ class _SweetHomeState extends State<SweetHome> {
         ),
         Text(
           "Add Memories To Get Started",
-          style: Theme.of(context).textTheme.bodyText1,
+          style: Theme.of(context).textTheme.bodyText2,
         ),
       ],
     );
@@ -62,15 +65,57 @@ class _SweetHomeState extends State<SweetHome> {
       itemCount: cards.length,
       itemBuilder: (BuildContext context, int index) {
         SweetCard card = cards[index];
-        return Card(
-          child: ListTile(
-            title: Text(card.title),
-            subtitle: Text(card.description ?? ""),
-            trailing: IconButton(
-              icon: const Icon(Icons.delete),
-              onPressed: () {
-                Provider.of<List<SweetCard>>(context).removeAt(index);
-              },
+        return Dismissible(
+          key: Key(card.id),
+          child: SweetCardView(card: card),
+          onDismissed: (dir) {
+            if (dir == DismissDirection.endToStart) {
+              card.delete();
+            }
+
+            if (dir == DismissDirection.startToEnd) {
+              card.archive();
+            }
+          },
+          background: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Center(
+              child: Row(
+                children: [
+                  Image.asset(
+                    "images/folders.png",
+                    height: 60,
+                  ),
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  Text(
+                    "Archive",
+                    style: Theme.of(context).textTheme.bodyText2,
+                  ),
+                ],
+              ),
+            ),
+          ),
+          secondaryBackground: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Center(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Text(
+                    "Delete",
+                    style: Theme.of(context).textTheme.bodyText2,
+                  ),
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  Image.asset(
+                    "images/trash.png",
+                    height: 60,
+                  ),
+                ],
+              ),
             ),
           ),
         );

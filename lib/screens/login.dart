@@ -37,7 +37,7 @@ class _SweetLoginState extends State<SweetLogin> {
             child: Text(
               'Keep track of your sweet memories, get started and enjoy!',
               textAlign: TextAlign.center,
-              style: Theme.of(context).textTheme.bodyText1,
+              style: Theme.of(context).textTheme.bodyText2,
             ),
           ),
           const SizedBox(

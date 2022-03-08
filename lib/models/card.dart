@@ -1,4 +1,5 @@
 import 'package:sweetcards/models/icon.dart';
+import 'package:sweetcards/services/db.dart';
 
 class SweetCard {
   String id;
@@ -7,6 +8,8 @@ class SweetCard {
   String user;
   SweetIcon icon;
   String? description;
+  DateTime? createdDate;
+  bool isArchived;
 
   SweetCard({
     required this.id,
@@ -15,6 +18,8 @@ class SweetCard {
     required this.user,
     required this.icon,
     this.description,
+    this.createdDate,
+    this.isArchived = false,
   });
 
   factory SweetCard.fromCloud(Map<String, dynamic> json, String id) {
@@ -25,6 +30,8 @@ class SweetCard {
       icon: SweetIcon.fromCloud(json['icon']),
       description: json['description'],
       user: json['user'],
+      createdDate: json['createdDate']?.toDate(),
+      isArchived: json['isArchived'] ?? false,
     );
   }
 
@@ -35,6 +42,16 @@ class SweetCard {
       'icon': icon.toCloud(),
       'description': description,
       'user': user,
+      'createdDate': createdDate,
+      'isArchived': isArchived,
     };
+  }
+
+  Future<void> delete() {
+    return SweetUniverse().deleteCard(this);
+  }
+
+  Future<void> archive() {
+    return SweetUniverse().archiveCard(this);
   }
 }
